@@ -11,7 +11,10 @@ import time
 import util
 from config_reader import config_reader
 from model import get_testing_model
-from scipy.ndimage.filters import gaussian_filter
+try:
+    from scipy.ndimage import gaussian_filter
+except ImportError:
+    from scipy.ndimage.filters import gaussian_filter
 
 
 # find connection in the specified sequence, center 29 is in the position 15
