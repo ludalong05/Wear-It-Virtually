@@ -164,11 +164,10 @@ def demo_tryon(person_path, clothing_path, output_dir):
 
     # Create a mask for smooth blending
     mask = cv2.GaussianBlur(clothing_fit, (15, 15), 0) / 255.0
-    mask_3d = np.stack([mask]*3, axis=-1)
 
     # Blend
     region = result[body_top:body_bottom, body_left:body_right]
-    blended = (region * (1 - mask_3d) + clothing_fit * mask_3d).astype(np.uint8)
+    blended = (region * (1 - mask) + clothing_fit * mask).astype(np.uint8)
     result[body_top:body_bottom, body_left:body_right] = blended
 
     out_path = os.path.join(output_dir, 'final.png')
